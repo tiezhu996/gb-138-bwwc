@@ -25,7 +25,8 @@ docker compose down -v --remove-orphans
 
 - 临终关怀知识导航
 - 症状照护与心理支持信息
-- 资源、愿望清单和家属指南
+- 资源和家属指南
+- **家人共用的心愿清单**：进入前先登记家人名字；新增心愿记录提出人，完成时记录完成人与时间；提出人可修改或撤回未完成的心愿，其他家人可代为标记完成；两人同时编辑同一条时，后提交者不会覆盖先提交的内容，会先看到对方刚改了什么再决定；全部 / 待完成 / 已完成筛选继续可用；数据保存在 PostgreSQL，服务重启后自动恢复，并通过 SSE 在家人设备间实时同步
 
 ## 本地开发
 
@@ -55,9 +56,9 @@ docker compose up -d db
 
 | 层级 | 技术 |
 | --- | --- |
-| 前端 | React + Vite |
-| 后端 | Node.js health API |
-| 数据库 | PostgreSQL |
+| 前端 | React + Vite（SSE 实时同步） |
+| 后端 | Node.js HTTP API（心愿清单 + health API，乐观并发控制） |
+| 数据库 | PostgreSQL（心愿数据持久化） |
 | 部署 | Docker Compose + Nginx |
 
 ## 项目目录结构

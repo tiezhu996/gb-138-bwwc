@@ -7,3 +7,16 @@ CREATE TABLE IF NOT EXISTS app_metadata (
 INSERT INTO app_metadata (key, value)
 VALUES ('project', 'gb-138')
 ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value, updated_at = CURRENT_TIMESTAMP;
+
+-- 家人共用的关怀档案：心愿清单
+CREATE TABLE IF NOT EXISTS wishes (
+  id BIGSERIAL PRIMARY KEY,
+  text TEXT NOT NULL,
+  created_by TEXT NOT NULL,
+  completed_by TEXT,
+  completed BOOLEAN NOT NULL DEFAULT FALSE,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  completed_at TIMESTAMPTZ,
+  version BIGINT NOT NULL DEFAULT 1
+);
